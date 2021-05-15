@@ -1,0 +1,1 @@
+Close the input stream. Closing is essential for output streams to be sure all information has been written we'll to the disk, but is also good practice for input streams to release system resources and make the file available for other programs that might need to write it.
