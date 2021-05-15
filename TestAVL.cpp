@@ -8,110 +8,50 @@
 using namespace std;
 
 #include "AVL_ADT.h"
+#include "ReadNBuild.h"
 
-struct DATA
-{
-	string key;
-	int frequency;
-	string source;
-};
+int menu(void);
 
-void print(DATA ss) {
-	cout << ss.key <<  ", " << ss.frequency << endl;
-}
-
-int main() {
+int main(void) {
+	int input;
 	AvlTree<DATA, int> tree;
-	if(tree.AVL_Empty())
-		cout << "Empty tree."<< endl;
-
-	string fileName = "test.txt";
-
-	ifstream inFile;
-//------open the file---------
-	inFile.open(fileName);
-  if (!inFile) {
-      cout << "Unable to open file";
-      exit(1); // terminate with error
-  }
-//----------------------------
-
-
-	string x;
-	map<string, int> dataBook;
-
-	pair<string, int> p;
-	while (inFile >> x) {
-    //https://stackoverflow.com/questions/313970/how-to-convert-stdstring-to-lower-case/24063783
-    // -----------Trimming----------------
-    transform(x.begin(), x.end(), x.begin(), [](unsigned char c){ return tolower(c); });
-
-    for (int i = 0, len = x.size(); i < len; i++)
-    {
-        if (ispunct(x[i]))
-        {
-            x.erase(i--, 1);
-            len = x.size();
-        }
-    }
-		// ----------Trimming END--------------
-
-		bool isPresent = false;
-		for (auto it=dataBook.begin(); it!=dataBook.end(); it++) {
-			if (it->first == x) {
-				it->second++;
-				if (!isPresent) isPresent = true;
-			}
+	while( 1 ) {
+		input = menu();
+		switch(input) {
+			case 1: readNBuild(&tree); break;
+			case 2: cout << "in progress...."; break;
+			case 3: cout << "in progress...."; break;
+			case 4: cout << "in progress...."; break;
+			case 5: cout << "in progress...."; break;
+			case 6: cout << "in progress...."; break;
+			case 7: cout << "in progress...."; break;
+			case 8: cout << "in progress...."; break;
+			case 9: cout << "in progress...."; break;
+			case 0: return 0;
 		}
-		if (!isPresent) {
-			p.first = x;
-			p.second = 1;
-			dataBook.insert(p);
-		}
-
 	}
 
-	for (auto it=dataBook.begin(); it!=dataBook.end(); it++) {
-		DATA newData;
-		newData.key = it->first;
-		newData.frequency = it->second;
-    tree.AVL_Insert(newData);
-  }
+	return 0;
+}
 
+int menu(void) {
+	cout << "\n\n--------------------------------------\n";
+	cout << "Choose one of the following functions: " << endl;
+	cout << "1. Learn an index dictionary from a file (without phrases)." << endl;
+	cout << "2. Print the index dictionary. " << endl;
+	cout << "3. Print the AVL tree of the dictionary." << endl;
+	cout << "4. Output the dictionary to a text file." << endl;
+	cout << "5. Load dictionary from a file." << endl;
+	cout << "6. Learn an index dictionary from a set of files (without phrases)." << endl;
+	cout << "7. Input a word with input suggestions." << endl;
+	cout << "8. Learn an index dictionary from a file (with phrases)." << endl;
+	cout << "9. Delete low frequency words from the dictionary." << endl;
+	cout << "0. Quit." << endl;
+	cout << "--------------------------------------\n\n";
+	cout << ">>";
 
+	int n;
+	cin >> n;
+	return n;
 
-
-	// DATA newItem;
-	// newItem.info = "Dongmo";
-	// newItem.key = 10;
-	// tree.AVL_Insert(newItem);
-	//
-	// newItem.info = "John";
-	// newItem.key = 20;
-	// tree.AVL_Insert(newItem);
-	//
-	// newItem.info = "Jane";
-	// newItem.key = 30;
-	// tree.AVL_Insert(newItem);
-	//
-	// tree.AVL_Print();
-	//
-	// cout<< "More to go ..." << endl;
-	//
-	// newItem.info = "Daniel";
-	// newItem.key = 40;
-	// tree.AVL_Insert(newItem);
-	// newItem.info = "Michelle";
-	// newItem.key = 50;
-	// tree.AVL_Insert(newItem);
-
-	tree.AVL_Print();
-
-	cout<<endl;
-
-	tree.AVL_Traverse(print);
-
-	inFile.close();
-
-    return 0;
 }

@@ -1,0 +1,5 @@
+1. The frequency of each word is implemented inside the _insert function so that
+   whenever new words are being read from the text files if the word already exists in the 
+   AVL tree only the frequency is incremented and for new words, they are inserted into 
+   The AVL tree.
+    
