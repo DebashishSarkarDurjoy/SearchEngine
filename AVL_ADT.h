@@ -134,10 +134,20 @@ NODE<TYPE>*  AvlTree<TYPE,  KTYPE>
 	    return  root;
 	} //  if NULL tree
 
+	// if (newPtr->data.key == ) {
+	// 	root->data.frequency++;
+	// 	for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
+	// 		root->data.info.insert({it->first, it->second});
+	// 	return root;
+	// }
+
 	// ---- if data already exists increment the frequency ----
+
 	if (newPtr->data.key == root->data.key) {
 		root->data.frequency++;
-	
+		auto it = newPtr->data.info.begin();
+		//for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
+		root->data.info.insert({it->first, it->second});
 		return root;
 	}
 	// ---------------
