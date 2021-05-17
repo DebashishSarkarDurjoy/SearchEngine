@@ -137,8 +137,7 @@ NODE<TYPE>*  AvlTree<TYPE,  KTYPE>
 	// ---- if data already exists increment the frequency ----
 	if (newPtr->data.key == root->data.key) {
 		root->data.frequency++;
-		pair<string, int> p;
-		p.first = newPtr->data.info;
+	
 		return root;
 	}
 	// ---------------
