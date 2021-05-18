@@ -1,12 +1,7 @@
 #ifndef READ_N_BUILD
 #define READ_N_BUILD
 
-struct DATA
-{
-	string key;
-	int frequency;
-	map<string, int> info;
-};
+
 
 void print(DATA ss) {
 	cout << ss.key <<  ", " << ss.frequency <<  ", " << endl;

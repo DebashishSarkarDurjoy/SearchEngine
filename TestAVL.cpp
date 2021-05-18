@@ -7,6 +7,13 @@
 
 using namespace std;
 
+struct DATA
+{
+	string key;
+	int frequency;
+	map<string, int> info;
+};
+
 #include "AVL_ADT.h"
 #include "ReadNBuild.h"
 
