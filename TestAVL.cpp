@@ -11,8 +11,14 @@ struct DATA
 {
 	string key;
 	int frequency;
-	map<string, int> info;
+	string info = "";
 };
+
+void print(DATA ss) {
+	cout << ss.key <<  ", " << ss.frequency <<  ", " << endl;
+	cout << ss.info;
+  cout << endl;
+}
 
 #include "AVL_ADT.h"
 #include "ReadNBuild.h"
@@ -26,7 +32,7 @@ int main(void) {
 		input = menu();
 		switch(input) {
 			case 1: readNBuild(&tree); break;
-			case 2: cout << "in progress...."; break;
+			case 2: tree.AVL_Traverse(print); break;
 			case 3: cout << "in progress...."; break;
 			case 4: cout << "in progress...."; break;
 			case 5: cout << "in progress...."; break;

@@ -147,7 +147,8 @@ NODE<TYPE>*  AvlTree<TYPE,  KTYPE>
 		root->data.frequency++;
 		auto it = newPtr->data.info.begin();
 		//for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
-		root->data.info.insert({it->first, it->second});
+		//root->data.info.insert({it->first, it->second});
+		root->data.info += newPtr->data.info;
 		return root;
 	}
 	// ---------------

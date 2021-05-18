@@ -1,12 +1,9 @@
 #ifndef READ_N_BUILD
 #define READ_N_BUILD
 
-
-
-void print(DATA ss) {
-	cout << ss.key <<  ", " << ss.frequency <<  ", " << endl;
-  for (auto it = ss.info.begin(); it!=ss.info.end(); it++)
-    cout << "(" << it->first << " , " << it->second << ")" << endl;
+void print2(DATA ss) {
+	//double perThousand = ( ss.frequency / total ) * 1000;
+	cout << ss.key <<  ", " << "perThousand" <<  ", " << endl;
   cout << endl;
 }
 
@@ -51,14 +48,14 @@ void readNBuild(AvlTree<DATA, int> *tree) {
   		DATA newData;
   		newData.key = x;
   		newData.frequency = 1;
-      newData.info.insert({fileName, location});
+      newData.info += "( " + fileName + ", " + to_string(location) + " )\n";
 
   		tree->AVL_Insert(newData);
 
   	}
 
 
-  	tree->AVL_Traverse(print);
+  	tree->AVL_Traverse(print2);
 
     inFile.close();
 
