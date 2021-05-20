@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -24,22 +25,23 @@ void print(DATA ss) {
 #include "ReadNBuild.h"
 
 int menu(void);
+void deleteLowF(AvlTree<DATA, string>* tree);
 
 int main(void) {
 	int input;
-	AvlTree<DATA, int> tree;
+	AvlTree<DATA, string> tree;
 	while( 1 ) {
 		input = menu();
 		switch(input) {
 			case 1: readNBuild(&tree); break;
 			case 2: tree.AVL_Traverse(print); break;
-			case 3: cout << "in progress...."; break;
+			case 3: tree.AVL_Print(); break;
 			case 4: cout << "in progress...."; break;
 			case 5: cout << "in progress...."; break;
 			case 6: cout << "in progress...."; break;
 			case 7: cout << "in progress...."; break;
 			case 8: cout << "in progress...."; break;
-			case 9: cout << "in progress...."; break;
+			case 9: deleteLowF(&tree); break;
 			case 0: return 0;
 		}
 	}
@@ -66,5 +68,22 @@ int menu(void) {
 	int n;
 	cin >> n;
 	return n;
+
+}
+
+void deleteLowF(AvlTree<DATA, string>* tree) {
+	vector<string> toDelete;
+	double threshold;
+
+	cout << "Enter threshold: ";
+	cin >> threshold;
+
+	tree->AVL_Traverse(&toDelete, threshold);
+
+	cout << "Deleted: " << endl;
+	for (auto e: toDelete) {
+		cout << e << endl;
+		tree->AVL_Delete(e);
+	}
 
 }

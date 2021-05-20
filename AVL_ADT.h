@@ -47,6 +47,11 @@ class AvlTree
 	    void  _traversal  (void (*process)(TYPE dataProc),
 	                              NODE<TYPE>    *root);
 
+			void  _traversal  (void (*process)(TYPE dataProc, int t),
+													NODE<TYPE>    *root);
+
+			void _traversal (vector<string> *v, double u, NODE<TYPE> *root);
+
 	    void  _destroyAVL (NODE<TYPE>  *root);
 
 //  	The following function is used for debugging.
@@ -59,6 +64,10 @@ class AvlTree
 	    bool  AVL_Delete   (KTYPE  dltKey);
 	    bool  AVL_Retrieve (KTYPE  key,     TYPE& dataOut);
 	    void  AVL_Traverse (void (*process)(TYPE  dataProc)); //in-order
+			void  AVL_Traverse (void (*process)(TYPE  dataProc, int t)); //in-order
+
+			void AVL_Traverse (vector<string> *v, double u);
+
 
 			bool AVL_Find(KTYPE key);
 
@@ -149,6 +158,7 @@ NODE<TYPE>*  AvlTree<TYPE,  KTYPE>
 		//for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
 		//root->data.info.insert({it->first, it->second});
 		root->data.info += newPtr->data.info;
+		count++;
 		return root;
 	}
 	// ---------------
@@ -689,6 +699,9 @@ NODE<TYPE>*  AvlTree<TYPE, KTYPE>
 	    return root;
 }	//  _retrieve
 
+
+//--------Original-------------
+
 /*	==================== AVL_Traverse ====================
 	Process tree using inorder traversal.
 	   Pre   process used to "visit" nodes during traversal
@@ -710,8 +723,6 @@ void  AvlTree<TYPE, KTYPE>
 	   Pre   tree has been created (may be null)
 	   Post  all nodes processed
 */
-
-
 template <class TYPE, class KTYPE>
 void  AvlTree<TYPE, KTYPE>
   ::  _traversal (void(*process)(TYPE dataproc),
@@ -726,6 +737,72 @@ void  AvlTree<TYPE, KTYPE>
 	   } //  if
 	return;
 }	//  _traversal
+
+//-------------Original End-----------
+
+
+//---------------Traversal Type 2-------------
+template <class TYPE, class KTYPE>
+void  AvlTree<TYPE, KTYPE>
+  ::  AVL_Traverse (void (*process)(TYPE dataProc, int t))
+{
+//	Statements
+	_traversal (process, tree);
+	return;
+}	// end AVL_Traverse
+
+template <class TYPE, class KTYPE>
+void  AvlTree<TYPE, KTYPE>
+  ::  _traversal (void(*process)(TYPE dataproc, int t),
+                  NODE<TYPE> *root)
+{
+//	Statements
+	if (root)
+	   {
+	    _traversal  (process, root->left);
+	    process     (root->data, count);
+	    _traversal  (process, root->right);
+	   } //  if
+	return;
+}	//  _traversal
+
+//----------------Type 2 End------------------
+
+//-----------------Type 3--------------------
+template <class TYPE, class KTYPE>
+void  AvlTree<TYPE, KTYPE>
+  ::  AVL_Traverse (vector<string> *v, double u)
+{
+//	Statements
+	_traversal (v, u, tree);
+	return;
+}	// end AVL_Traverse
+
+/*	===================== _traversal =====================
+	Traverse tree using inorder traversal. To process a
+	node, we use the function passed when traversal is called.
+	   Pre   tree has been created (may be null)
+	   Post  all nodes processed
+*/
+template <class TYPE, class KTYPE>
+void  AvlTree<TYPE, KTYPE>
+  ::  _traversal (vector<string> *v, double u,
+                  NODE<TYPE> *root)
+{
+//	Statements
+	if (root)
+	   {
+	    _traversal  (v, u, root->left);
+	    if ( u >= ((root->data.frequency / (double) count)*1000) ) {
+				v->push_back(root->data.key);
+			}
+	    _traversal  (v, u, root->right);
+	   } //  if
+	return;
+}	//  _traversal
+
+//----------------------Type 3 END-------------
+
 
 /*	=================== AVL_Empty ==================
 	Returns true if tree is empty, false if any data.

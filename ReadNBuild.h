@@ -1,13 +1,13 @@
 #ifndef READ_N_BUILD
 #define READ_N_BUILD
 
-void print2(DATA ss) {
-	//double perThousand = ( ss.frequency / total ) * 1000;
-	cout << ss.key <<  ", " << "perThousand" <<  ", " << endl;
+void print2(DATA ss, int total) {
+	double perThousand = ( ss.frequency / (double)total ) * 1000;
+	cout << ss.key <<  ", " << perThousand <<  ", " << endl;
   cout << endl;
 }
 
-void readNBuild(AvlTree<DATA, int> *tree) {
+void readNBuild(AvlTree<DATA, string> *tree) {
 
 	if(tree->AVL_Empty()) cout << "Empty tree."<< endl;
 
