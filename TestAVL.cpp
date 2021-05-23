@@ -5,6 +5,7 @@
 #include <map>
 #include <fstream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -12,12 +13,15 @@ struct DATA
 {
 	string key;
 	int frequency;
-	string info = "";
+	set<pair<string, int> > info;;
 };
 
 void print(DATA ss) {
 	cout << ss.key <<  ", " << ss.frequency <<  ", " << endl;
-	cout << ss.info;
+	for (auto e: ss.info) {
+		cout << "(" << e.first << ", ";
+		cout << e.second <<  ")" << endl;
+	}
   cout << endl;
 }
 

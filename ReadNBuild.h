@@ -48,7 +48,7 @@ void readNBuild(AvlTree<DATA, string> *tree) {
   		DATA newData;
   		newData.key = x;
   		newData.frequency = 1;
-      newData.info += "( " + fileName + ", " + to_string(location) + " )\n";
+      newData.info.insert({fileName, location});
 
   		tree->AVL_Insert(newData);
 

@@ -155,9 +155,9 @@ NODE<TYPE>*  AvlTree<TYPE,  KTYPE>
 	if (newPtr->data.key == root->data.key) {
 		root->data.frequency++;
 		auto it = newPtr->data.info.begin();
-		//for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
-		//root->data.info.insert({it->first, it->second});
-		root->data.info += newPtr->data.info;
+		for (auto it = newPtr->data.info.begin(); it!=newPtr->data.info.end(); it++)
+		root->data.info.insert({it->first, it->second});
+
 		count++;
 		return root;
 	}
